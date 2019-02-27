@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-
+    
   <div v-loading="loading" element-loading-text="加载中..." style="min-height: 35vw;" v-if="!error">
     <div class="banner" >
       <div class="bg" ref="bg"
@@ -46,7 +46,7 @@
               <img v-lazy="iitem.picUrl">
               <a class="cover-link"></a>
             </div>
-            <mall-goods :msg="iitem" v-for="(iitem,j) in item.panelContents" :key="j" v-if="iitem.type != 2"></mall-goods>
+            <mall-goods :msg="iitem" v-for="(iitem,j) in item.panelContents" :key="j+'key'" v-if="iitem.type != 2 && iitem.type != 3"></mall-goods>
           </div>
         </y-shelf>
       </section>
@@ -92,7 +92,7 @@
           h: 0
         },
         home: [],
-        loading: false,
+        loading: true,
         notify: '1',
         dialogVisible: false,
         timer: ''

@@ -2,15 +2,15 @@
   <div class="good-item">
     <div style="">
       <div class="good-img">
-        <a target="_blank" :href="'http://xmall.exrick.cn/#/goodsDetails?productId='+msg.productId">
-          <img v-lazy="msg.productImageBig" :alt="msg.productName">
+        <a @click="openProduct(msg.productId)">
+          <img v-lazy="msg.productImageBig" :alt="msg.productName" :key="msg.productImageBig">
         </a>
       </div>
       <h6 class="good-title" v-html="msg.productName">{{msg.productName}}</h6>
       <h3 class="sub-title ellipsis">{{msg.subTitle}}</h3>
       <div class="good-price pr">
         <div class="ds pa">
-          <a target="_blank" :href="'http://xmall.exrick.cn/#/goodsDetails?productId='+msg.productId">
+          <a @click="openProduct(msg.productId)">
             <y-button text="查看详情" style="margin: 0 5px"></y-button>
           </a>
           <y-button text="加入购物车"
@@ -19,7 +19,7 @@
                     classStyle="main-btn"
           ></y-button>
         </div>
-        <p><span style="font-size:14px">￥</span>{{msg.salePrice.toFixed(2)}}</p>
+        <p><span style="font-size:14px">￥</span>{{Number(msg.salePrice).toFixed(2)}}</p>
       </div>
     </div>
   </div>
@@ -42,6 +42,9 @@
       ...mapMutations(['ADD_CART', 'ADD_ANIMATION', 'SHOW_CART']),
       goodsDetails (id) {
         this.$router.push({path: 'goodsDetails/productId=' + id})
+      },
+      openProduct (id) {
+        window.open('//' + window.location.host + '/#/goodsDetails?productId=' + id)
       },
       addCart (id, price, name, img) {
         if (!this.showMoveImg) {     // 动画是否在运动
